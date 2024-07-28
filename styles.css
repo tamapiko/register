@@ -3,30 +3,39 @@ body {
 }
 
 #app {
-    max-width: 800px;
+    max-width: 1200px;
     margin: auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
 }
 
-h1, h2 {
+h1 {
     text-align: center;
 }
 
-input, button {
-    display: block;
-    margin: 10px 0;
+.container {
+    display: flex;
+    justify-content: space-between;
 }
 
-input {
+.cart-section, .control-section {
+    width: 45%;
+}
+
+h2 {
+    text-align: left;
+}
+
+input, button, select {
+    display: block;
+    margin: 10px 0;
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
 }
 
 button {
-    padding: 10px;
     background-color: #4CAF50;
     color: white;
     border: none;
