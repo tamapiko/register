@@ -2,6 +2,7 @@
 let products = {};
 let discounts = {};
 let cart = [];
+let barcodeInput = '';
 
 // 商品追加関数
 function addProduct() {
@@ -10,13 +11,6 @@ function addProduct() {
     const price = parseFloat(document.getElementById('newPrice').value);
 
     products[barcode] = { name, price };
-
-    // 商品リストに追加
-    const option = document.createElement('option');
-    option.value = barcode;
-    option.text = `${name} - ${price}円`;
-    document.getElementById('productList').add(option);
-
     alert('商品が追加されました');
 }
 
@@ -25,17 +19,45 @@ function addDiscount() {
     const barcode = document.getElementById('discountBarcode').value;
     const value = parseFloat(document.getElementById('discountValue').value);
 
-    discounts[barcode] = value;
-    alert('割引が追加されました');
+    applyDiscount(barcode, value);
 }
+
+// 割引登録関数
+function registerDiscount() {
+    const barcode = document.getElementById('registerDiscountBarcode').value;
+    const value = parseFloat(document.getElementById('registerDiscountValue').value);
+
+    discounts[barcode] = value;
+    alert('割引が登録されました');
+}
+
+// 割引適用関数
+function applyDiscount(barcode, value) {
+    cart.forEach(item => {
+        item.price -= value;
+    });
+
+    updateCart();
+}
+
+// キーボードイベントリスナー
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        scanProduct();
+    } else {
+        barcodeInput += event.key;
+    }
+});
 
 // 商品スキャン関数
 function scanProduct() {
-    const barcode = document.getElementById('productList').value;
+    // スキャン内容の処理
+    const barcode = barcodeInput;
+    barcodeInput = '';
 
     // 割引の場合
     if (discounts[barcode] !== undefined) {
-        applyDiscount(barcode);
+        applyDiscount(barcode, discounts[barcode]);
     } else if (products[barcode] !== undefined) {
         addToCart(barcode);
     } else {
@@ -53,16 +75,6 @@ function addToCart(barcode) {
     } else {
         cart.push({ ...product, barcode, quantity: 1 });
     }
-
-    updateCart();
-}
-
-// 割引適用関数
-function applyDiscount(barcode) {
-    const discountValue = discounts[barcode];
-    cart.forEach(item => {
-        item.price -= discountValue;
-    });
 
     updateCart();
 }
