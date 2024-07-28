@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>レジシステム</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <h1>レジシステム</h1>
+        
+        <!-- 商品データ追加フォーム -->
+        <div>
+            <h2>商品データ追加</h2>
+            <input type="text" id="newBarcode" placeholder="バーコード">
+            <input type="text" id="newProductName" placeholder="商品名">
+            <input type="number" id="newPrice" placeholder="値段">
+            <button onclick="addProduct()">追加</button>
+        </div>
+
+        <!-- 割引データ追加フォーム -->
+        <div>
+            <h2>割引データ追加</h2>
+            <input type="text" id="discountBarcode" placeholder="割引バーコード">
+            <input type="number" id="discountValue" placeholder="割引値">
+            <button onclick="addDiscount()">追加</button>
+        </div>
+
+        <!-- 商品スキャン -->
+        <div>
+            <h2>商品スキャン</h2>
+            <input type="text" id="barcodeInput" placeholder="バーコードを入力">
+            <button onclick="scanProduct()">スキャン</button>
+        </div>
+
+        <!-- 購入カゴ -->
+        <div>
+            <h2>購入カゴ</h2>
+            <ul id="cart"></ul>
+            <button onclick="clearCart()">カゴをクリア</button>
+            <h3>合計: <span id="totalAmount">0</span>円</h3>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
