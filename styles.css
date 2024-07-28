@@ -23,11 +23,30 @@ h1 {
     width: 45%;
 }
 
+.cart-section {
+    position: relative;
+}
+
+.clear-cart-button {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.clear-cart-button:hover {
+    background-color: #ff1a1a;
+}
+
 h2 {
     text-align: left;
 }
 
-input, button, select {
+input, button {
     display: block;
     margin: 10px 0;
     width: 100%;
@@ -49,6 +68,8 @@ button:hover {
 ul {
     list-style-type: none;
     padding: 0;
+    max-height: 400px;
+    overflow-y: auto;
 }
 
 li {
