@@ -106,3 +106,41 @@ function clearCart() {
     updateCart();
     alert('カゴがクリアされました');
 }
+
+// 商品データ読み込み関数
+function loadProductData() {
+    const file = document.getElementById('productFile').files[0];
+    const reader = new FileReader();
+
+    reader.onload = function(event) {
+        const lines = event.target.result.split('\n');
+        lines.forEach(line => {
+            const [barcode, name, price] = line.split(',');
+            if (barcode && name && price) {
+                products[barcode] = { name, price: parseFloat(price) };
+            }
+        });
+        alert('商品データが読み込まれました');
+    };
+
+    reader.readAsText(file);
+}
+
+// クーポンデータ読み込み関数
+function loadCouponData() {
+    const file = document.getElementById('couponFile').files[0];
+    const reader = new FileReader();
+
+    reader.onload = function(event) {
+        const lines = event.target.result.split('\n');
+        lines.forEach(line => {
+            const [barcode, value] = line.split(',');
+            if (barcode && value) {
+                discounts[barcode] = parseFloat(value);
+            }
+        });
+        alert('クーポンデータが読み込まれました');
+    };
+
+    reader.readAsText(file);
+}
