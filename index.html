@@ -43,6 +43,20 @@
                     <input type="number" id="registerDiscountValue" placeholder="割引値">
                     <button onclick="registerDiscount()">登録</button>
                 </div>
+
+                <!-- 商品データ読み込み -->
+                <div>
+                    <h2>商品データ読み込み</h2>
+                    <input type="file" id="productFile" accept=".txt">
+                    <button onclick="loadProductData()">読み込み</button>
+                </div>
+
+                <!-- クーポンデータ読み込み -->
+                <div>
+                    <h2>クーポンデータ読み込み</h2>
+                    <input type="file" id="couponFile" accept=".txt">
+                    <button onclick="loadCouponData()">読み込み</button>
+                </div>
             </div>
         </div>
     </div>
