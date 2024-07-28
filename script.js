@@ -10,6 +10,13 @@ function addProduct() {
     const price = parseFloat(document.getElementById('newPrice').value);
 
     products[barcode] = { name, price };
+
+    // 商品リストに追加
+    const option = document.createElement('option');
+    option.value = barcode;
+    option.text = `${name} - ${price}円`;
+    document.getElementById('productList').add(option);
+
     alert('商品が追加されました');
 }
 
@@ -24,7 +31,7 @@ function addDiscount() {
 
 // 商品スキャン関数
 function scanProduct() {
-    const barcode = document.getElementById('barcodeInput').value;
+    const barcode = document.getElementById('productList').value;
 
     // 割引の場合
     if (discounts[barcode] !== undefined) {
@@ -34,8 +41,6 @@ function scanProduct() {
     } else {
         alert('商品が見つかりません');
     }
-
-    document.getElementById('barcodeInput').value = '';
 }
 
 // カゴに商品追加関数
