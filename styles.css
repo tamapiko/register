@@ -27,18 +27,16 @@ h1 {
     position: relative;
 }
 
-.clear-cart-button {
-    position: absolute;
-    right: 0;
-    bottom: 0;
+.clear-cart-button, .save-cart-button {
     background-color: #ff4d4d;
     color: white;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
+    margin-top: 10px;
 }
 
-.clear-cart-button:hover {
+.clear-cart-button:hover, .save-cart-button:hover {
     background-color: #ff1a1a;
 }
 
@@ -75,4 +73,22 @@ ul {
 li {
     padding: 10px;
     border-bottom: 1px solid #ccc;
+}
+
+.quantity-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quantity-controls button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.quantity-controls button:hover {
+    background-color: #0056b3;
 }
