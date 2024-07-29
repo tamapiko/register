@@ -10,7 +10,6 @@ function addProduct() {
     const price = parseFloat(document.getElementById('newPrice').value);
 
     products[barcode] = { name, price };
-    alert('商品が追加されました');
 }
 
 // 割引追加関数
@@ -19,7 +18,6 @@ function addDiscount() {
     const value = parseFloat(document.getElementById('discountValue').value);
 
     discounts[barcode] = value;
-    alert('割引が追加されました');
 }
 
 // キーボードイベントリスナー
@@ -40,12 +38,8 @@ function scanProduct() {
     // 割引の場合
     if (discounts[barcode] !== undefined) {
         addDiscountToCart(barcode);
-        alert('割引が適用されました');
     } else if (products[barcode] !== undefined) {
         addToCart(barcode);
-        alert('商品がスキャンされました');
-    } else {
-        alert('商品が見つかりません');
     }
 }
 
@@ -99,7 +93,6 @@ function updateCart() {
 function clearCart() {
     cart = [];
     updateCart();
-    alert('カゴがクリアされました');
 }
 
 // 商品データ保存関数
@@ -113,7 +106,6 @@ function saveProductData() {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    alert('商品データが保存されました');
 }
 
 // 割引データ保存関数
@@ -127,7 +119,6 @@ function saveCouponData() {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    alert('割引データが保存されました');
 }
 
 // 商品データ読み込み関数
@@ -143,7 +134,6 @@ function loadProductData() {
                 products[barcode] = { name, price: parseFloat(price) };
             }
         });
-        alert('商品データが読み込まれました');
     };
 
     reader.readAsText(file);
@@ -162,7 +152,6 @@ function loadCouponData() {
                 discounts[barcode] = parseFloat(value);
             }
         });
-        alert('クーポンデータが読み込まれました');
     };
 
     reader.readAsText(file);
