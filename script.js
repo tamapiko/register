@@ -113,10 +113,32 @@ function clearCart() {
     alert('カゴがクリアされました');
 }
 
-// カゴ保存関数
-function saveCart() {
-    localStorage.setItem('cart', JSON.stringify(cart));
-    alert('カゴが保存されました');
+// 商品データ保存関数
+function saveProductData() {
+    const productData = Object.entries(products).map(([barcode, { name, price }]) => `${barcode},${name},${price}`).join('\n');
+    const blob = new Blob([productData], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'product_data.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    alert('商品データが保存されました');
+}
+
+// 割引データ保存関数
+function saveCouponData() {
+    const couponData = Object.entries(discounts).map(([barcode, value]) => `${barcode},${value}`).join('\n');
+    const blob = new Blob([couponData], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'coupon_data.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    alert('割引データが保存されました');
 }
 
 // 商品データ読み込み関数
