@@ -89,9 +89,15 @@ function updateCart() {
 
     let total = 0;
 
-    cart.forEach(item => {
+    cart.forEach((item, index) => {
         const listItem = document.createElement('li');
-        listItem.textContent = `${item.name} - ${item.price}円 x ${item.quantity}`;
+        listItem.innerHTML = `
+            ${item.name} - ${item.price}円 x ${item.quantity}
+            <div class="quantity-controls">
+                <button onclick="decreaseQuantity(${index})">-</button>
+                <button onclick="increaseQuantity(${index})">+</button>
+            </div>
+        `;
         cartList.appendChild(listItem);
 
         total += item.price * item.quantity;
@@ -105,6 +111,12 @@ function clearCart() {
     cart = [];
     updateCart();
     alert('カゴがクリアされました');
+}
+
+// カゴ保存関数
+function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert('カゴが保存されました');
 }
 
 // 商品データ読み込み関数
@@ -143,4 +155,20 @@ function loadCouponData() {
     };
 
     reader.readAsText(file);
+}
+
+// 数量増加関数
+function increaseQuantity(index) {
+    cart[index].quantity++;
+    updateCart();
+}
+
+// 数量減少関数
+function decreaseQuantity(index) {
+    if (cart[index].quantity > 1) {
+        cart[index].quantity--;
+    } else {
+        cart.splice(index, 1);
+    }
+    updateCart();
 }
