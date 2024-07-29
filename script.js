@@ -19,27 +19,8 @@ function addDiscount() {
     const barcode = document.getElementById('discountBarcode').value;
     const value = parseFloat(document.getElementById('discountValue').value);
 
-    applyDiscount(barcode, value);
-    alert('割引が追加されました');
-}
-
-// 割引登録関数
-function registerDiscount() {
-    const barcode = document.getElementById('registerDiscountBarcode').value;
-    const value = parseFloat(document.getElementById('registerDiscountValue').value);
-
     discounts[barcode] = value;
-    alert('割引が登録されました');
-}
-
-// 割引適用関数
-function applyDiscount(barcode, value) {
-    cart.forEach(item => {
-        item.price -= value;
-    });
-
-    updateCart();
-    alert('割引が適用されました');
+    alert('割引が追加されました');
 }
 
 // キーボードイベントリスナー
@@ -66,6 +47,16 @@ function scanProduct() {
     } else {
         alert('商品が見つかりません');
     }
+}
+
+// 割引適用関数
+function applyDiscount(barcode, value) {
+    cart.forEach(item => {
+        item.price -= value;
+    });
+
+    updateCart();
+    alert('割引が適用されました');
 }
 
 // カゴに商品追加関数
