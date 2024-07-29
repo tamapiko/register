@@ -1,4 +1,3 @@
-// 商品データ、割引データ、カゴの初期化
 let products = {};
 let discounts = {};
 let cart = [];
@@ -40,7 +39,8 @@ function scanProduct() {
 
     // 割引の場合
     if (discounts[barcode] !== undefined) {
-        applyDiscount(barcode, discounts[barcode]);
+        addDiscountToCart(barcode);
+        alert('割引が適用されました');
     } else if (products[barcode] !== undefined) {
         addToCart(barcode);
         alert('商品がスキャンされました');
@@ -49,14 +49,12 @@ function scanProduct() {
     }
 }
 
-// 割引適用関数
-function applyDiscount(barcode, value) {
-    cart.forEach(item => {
-        item.price -= value;
-    });
-
+// 割引をカゴに追加する関数
+function addDiscountToCart(barcode) {
+    const discountValue = discounts[barcode];
+    const discountItem = { name: '割引', price: -discountValue, barcode, quantity: 1 };
+    cart.push(discountItem);
     updateCart();
-    alert('割引が適用されました');
 }
 
 // カゴに商品追加関数
