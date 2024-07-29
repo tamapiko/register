@@ -16,7 +16,6 @@
                 <ul id="cart"></ul>
                 <h3>合計: <span id="totalAmount">0</span>円</h3>
                 <button onclick="clearCart()" class="clear-cart-button">カゴをクリア</button>
-                <button onclick="saveCart()" class="save-cart-button">カゴを保存</button>
             </div>
             <!-- 商品追加およびスキャン -->
             <div class="control-section">
@@ -27,6 +26,7 @@
                     <input type="text" id="newProductName" placeholder="商品名">
                     <input type="number" id="newPrice" placeholder="値段">
                     <button onclick="addProduct()">追加</button>
+                    <button onclick="saveProductData()">商品データを保存</button>
                 </div>
 
                 <!-- 割引データ追加フォーム -->
@@ -35,6 +35,7 @@
                     <input type="text" id="discountBarcode" placeholder="割引バーコード">
                     <input type="number" id="discountValue" placeholder="割引値">
                     <button onclick="addDiscount()">追加</button>
+                    <button onclick="saveCouponData()">割引データを保存</button>
                 </div>
 
                 <!-- 割引バーコード登録 -->
