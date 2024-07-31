@@ -15,9 +15,13 @@ body {
     align-items: center;
 }
 
+h1 {
+    color: #333;
+}
+
 .container {
     display: flex;
-    width: 800px;
+    width: 80%;
     justify-content: space-between;
     background-color: white;
     border-radius: 8px;
@@ -27,11 +31,12 @@ body {
 }
 
 .cart-section, .control-section {
-    width: 45%;
+    width: 48%;
 }
 
 .cart-section h2, .control-section h2 {
     text-align: center;
+    color: #007bff;
     margin-top: 0;
 }
 
@@ -53,6 +58,7 @@ body {
 
 .cart-section h3 {
     text-align: center;
+    color: #333;
 }
 
 .clear-cart-button {
@@ -114,4 +120,11 @@ body {
 
 .control-section button:hover {
     background-color: #0056b3;
+}
+
+.form-section {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
