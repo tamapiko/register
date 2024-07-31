@@ -4,7 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>レジシステム</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+        #app {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            display: flex;
+            width: 800px;
+            justify-content: space-between;
+        }
+        .cart-section, .control-section {
+            width: 45%;
+        }
+        .cart-section h2, .control-section h2 {
+            text-align: center;
+        }
+        .clear-cart-button {
+            display: block;
+            margin: 0 auto;
+        }
+        .quantity-controls {
+            display: inline-flex;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -28,23 +60,20 @@
                     <button onclick="addProduct()">追加</button>
                     <button onclick="saveProductData()">商品データを保存</button>
                 </div>
-
                 <!-- 割引データ追加フォーム -->
                 <div>
                     <h2>割引データ追加</h2>
                     <input type="text" id="discountBarcode" placeholder="割引バーコード">
-                    <input type="number" id="discountValue" placeholder="割引値">
+                    <input type="text" id="discountValue" placeholder="割引値">
                     <button onclick="addDiscount()">追加</button>
                     <button onclick="saveCouponData()">割引データを保存</button>
                 </div>
-
                 <!-- 商品データ読み込み -->
                 <div>
                     <h2>商品データ読み込み</h2>
                     <input type="file" id="productFile" accept=".txt">
                     <button onclick="loadProductData()">読み込み</button>
                 </div>
-
                 <!-- クーポンデータ読み込み -->
                 <div>
                     <h2>クーポンデータ読み込み</h2>
