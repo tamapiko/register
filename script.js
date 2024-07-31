@@ -101,12 +101,13 @@ function updateCart() {
     document.getElementById('totalAmount').textContent = total.toFixed(2);
 }
 
-// 数量増減関数
+// カゴ内商品の数量を増やす関数
 function increaseQuantity(index) {
     cart[index].quantity++;
     updateCart();
 }
 
+// カゴ内商品の数量を減らす関数
 function decreaseQuantity(index) {
     if (cart[index].quantity > 1) {
         cart[index].quantity--;
