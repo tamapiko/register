@@ -36,11 +36,9 @@ document.addEventListener('keydown', (event) => {
 
 // 商品スキャン関数
 function scanProduct() {
-    // スキャン内容の処理
     const barcode = barcodeInput;
     barcodeInput = '';
 
-    // 割引の場合
     if (discounts[barcode] !== undefined) {
         addDiscountToCart(barcode);
     } else if (products[barcode] !== undefined) {
@@ -126,12 +124,11 @@ function clearCart() {
 
 // 商品データ読み込み関数
 function loadProductData() {
-    const fileInput = document.getElementById('productFile');
-    const file = fileInput.files[0];
+    const file = document.getElementById('productFile').files[0];
     const reader = new FileReader();
 
-    reader.onload = function(e) {
-        const lines = e.target.result.split('\n');
+    reader.onload = function(event) {
+        const lines = event.target.result.split('\n');
         lines.forEach(line => {
             const [barcode, name, price] = line.split(',');
             products[barcode] = { name, price: parseFloat(price) };
@@ -141,21 +138,20 @@ function loadProductData() {
     reader.readAsText(file);
 }
 
-// クーポンデータ読み込み関数
+// 割引データ読み込み関数
 function loadCouponData() {
-    const fileInput = document.getElementById('couponFile');
-    const file = fileInput.files[0];
+    const file = document.getElementById('couponFile').files[0];
     const reader = new FileReader();
 
-    reader.onload = function(e) {
-        const lines = e.target.result.split('\n');
+    reader.onload = function(event) {
+        const lines = event.target.result.split('\n');
         lines.forEach(line => {
-            const [barcode, discount] = line.split(',');
-            if (discount.includes('%')) {
-                const percentage = parseFloat(discount.replace('%', ''));
+            const [barcode, value] = line.split(',');
+            if (value.includes('%')) {
+                const percentage = parseFloat(value.replace('%', ''));
                 discounts[barcode] = { type: 'percentage', value: percentage };
             } else {
-                discounts[barcode] = { type: 'fixed', value: parseFloat(discount) };
+                discounts[barcode] = { type: 'fixed', value: parseFloat(value) };
             }
         });
     };
@@ -165,30 +161,24 @@ function loadCouponData() {
 
 // 商品データ保存関数
 function saveProductData() {
-    const data = Object.entries(products).map(([barcode, { name, price }]) => `${barcode},${name},${price}`).join('\n');
+    const data = Object.entries(products).map(([barcode, product]) => `${barcode},${product.name},${product.price}`).join('\n');
     const blob = new Blob([data], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
-
     const a = document.createElement('a');
     a.href = url;
     a.download = 'products.txt';
-    document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 }
 
 // クーポンデータ保存関数
 function saveCouponData() {
-    const data = Object.entries(discounts).map(([barcode, { type, value }]) => {
-        return type === 'percentage' ? `${barcode},${value}%` : `${barcode},${value}`;
-    }).join('\n');
+    const data = Object.entries(discounts).map(([barcode, discount]) => `${barcode},${discount.type === 'percentage' ? discount.value + '%' : discount.value}`).join('\n');
     const blob = new Blob([data], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
-
     const a = document.createElement('a');
     a.href = url;
     a.download = 'coupons.txt';
-    document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 }
