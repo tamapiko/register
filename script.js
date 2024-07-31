@@ -171,7 +171,7 @@ function saveProductData() {
     URL.revokeObjectURL(url);
 }
 
-// クーポンデータ保存関数
+// 割引データ保存関数
 function saveCouponData() {
     const data = Object.entries(discounts).map(([barcode, discount]) => `${barcode},${discount.type === 'percentage' ? discount.value + '%' : discount.value}`).join('\n');
     const blob = new Blob([data], { type: 'text/plain' });
