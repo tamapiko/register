@@ -56,20 +56,24 @@ h1 {
     align-items: center;
 }
 
-.cart-section h3 {
-    text-align: center;
+.total-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.total-section h3 {
     color: #333;
 }
 
 .clear-cart-button {
-    display: block;
-    margin: 10px auto 0;
-    padding: 10px 20px;
     background-color: #ff6b6b;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    padding: 10px 20px;
 }
 
 .clear-cart-button:hover {
