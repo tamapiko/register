@@ -14,13 +14,15 @@
             <div class="cart-section">
                 <h2>購入カゴ</h2>
                 <ul id="cart"></ul>
-                <h3>合計: <span id="totalAmount">0</span>円</h3>
-                <button onclick="clearCart()" class="clear-cart-button">カゴをクリア</button>
+                <div class="total-section">
+                    <h3>合計: <span id="totalAmount">0</span>円</h3>
+                    <button onclick="clearCart()" class="clear-cart-button">カゴをクリア</button>
+                </div>
             </div>
             <!-- 商品追加およびスキャン -->
             <div class="control-section">
                 <!-- 商品データ追加フォーム -->
-                <div>
+                <div class="form-section">
                     <h2>商品データ追加</h2>
                     <input type="text" id="newBarcode" placeholder="バーコード">
                     <input type="text" id="newProductName" placeholder="商品名">
@@ -29,7 +31,7 @@
                     <button onclick="saveProductData()">商品データを保存</button>
                 </div>
                 <!-- 割引データ追加フォーム -->
-                <div>
+                <div class="form-section">
                     <h2>割引データ追加</h2>
                     <input type="text" id="discountBarcode" placeholder="割引バーコード">
                     <input type="text" id="discountValue" placeholder="割引値">
@@ -37,13 +39,13 @@
                     <button onclick="saveCouponData()">割引データを保存</button>
                 </div>
                 <!-- 商品データ読み込み -->
-                <div>
+                <div class="form-section">
                     <h2>商品データ読み込み</h2>
                     <input type="file" id="productFile" accept=".txt">
                     <button onclick="loadProductData()">読み込み</button>
                 </div>
                 <!-- クーポンデータ読み込み -->
-                <div>
+                <div class="form-section">
                     <h2>クーポンデータ読み込み</h2>
                     <input type="file" id="couponFile" accept=".txt">
                     <button onclick="loadCouponData()">読み込み</button>
