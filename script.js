@@ -35,19 +35,19 @@ document.addEventListener("DOMContentLoaded", function () {
         change.textContent = `¥${paymentAmount.value - total}`;
     }
 
-    function removeItem(index) {
+    window.removeItem = function (index) {
         if (cart[index].quantity > 1) {
             cart[index].quantity--;
         } else {
             cart.splice(index, 1);
         }
         updateCart();
-    }
+    };
 
-    function addItem(index) {
+    window.addItem = function (index) {
         cart[index].quantity++;
         updateCart();
-    }
+    };
 
     resetCartButton.addEventListener("click", function () {
         cart = [];
