@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>レジシステム</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -11,48 +12,51 @@
         <div class="left-panel">
             <button id="reset-cart">カゴをリセット</button>
             <div id="cart-items">
-                <!-- 商品リストがここに表示されます -->
+                <!-- カートアイテムがここに表示される -->
             </div>
         </div>
         <div class="right-panel">
-            <div class="summary">
-                <p>合計 ¥<span id="total-price">0</span></p>
+            <div id="summary">
+                <p>合計 <span id="total-price">¥0</span></p>
                 <p>数量 <span id="total-quantity">0</span>点</p>
-                <p>支払い ¥<input type="number" id="payment-amount" value="0"></p>
-                <p>お釣り ¥<span id="change">0</span></p>
+                <p>支払い <input type="number" id="payment-amount" value="0"></p>
+                <p>お釣り <span id="change">¥0</span></p>
             </div>
-            <div class="buttons">
-                <p>商品登録・割引き登録</p>
-                <button id="add-item">商品の登録</button>
-                <button id="edit-item">商品の編集</button>
-                <button id="save-item-data">商品のデータ保存</button>
-                <p>割引きデータ</p>
-                <button id="add-discount">割引きの登録</button>
-                <button id="edit-discount">割引きの編集</button>
-                <button id="save-discount-data">割引きのデータ保存</button>
+            <div class="actions">
+                <h3>商品登録・割引登録</h3>
+                <div>
+                    <h4>商品データ</h4>
+                    <button id="register-product">商品の登録</button>
+                    <button id="edit-product">商品の編集</button>
+                    <button id="save-product-data">商品のデータ保存</button>
+                </div>
+                <div>
+                    <h4>割引データ</h4>
+                    <button id="register-discount">割引きの登録</button>
+                    <button id="edit-discount">割引きの編集</button>
+                    <button id="save-discount-data">割引きのデータ保存</button>
+                </div>
             </div>
         </div>
     </div>
-    
+
     <!-- 商品登録モーダル -->
-    <div id="item-modal" class="modal">
+    <div id="product-modal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>商品を登録</h2>
-            <input type="text" id="item-barcode" placeholder="バーコード">
-            <input type="text" id="item-name" placeholder="商品名">
-            <input type="number" id="item-price" placeholder="値段">
-            <button id="register-item">登録</button>
+            <h3>商品を登録</h3>
+            <label>バーコード <input type="text" id="product-barcode"></label>
+            <label>商品名 <input type="text" id="product-name"></label>
+            <label>値段 <input type="number" id="product-price"></label>
+            <button id="save-product">保存</button>
         </div>
     </div>
 
     <!-- 商品編集モーダル -->
-    <div id="item-edit-modal" class="modal">
+    <div id="edit-product-modal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>商品の編集</h2>
+            <h3>商品の編集</h3>
             <div id="edit-item-list">
-                <!-- 編集用商品リストがここに表示されます -->
+                <!-- 編集可能な商品リストがここに表示される -->
             </div>
         </div>
     </div>
