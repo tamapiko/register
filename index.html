@@ -4,55 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>レジシステム</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="app">
-        <h1>レジシステム</h1>
-        <div class="container">
-            <!-- 購入カゴ -->
-            <div class="cart-section">
-                <h2>購入カゴ</h2>
-                <ul id="cart"></ul>
-                <div class="total-section">
-                    <h3>合計: <span id="totalAmount">0</span>円</h3>
-                    <button onclick="clearCart()" class="clear-cart-button">カゴをクリア</button>
-                </div>
+    <div class="container">
+        <div class="left-panel">
+            <button id="reset-cart">カゴをリセット</button>
+            <div id="cart-items">
+                <!-- 商品リストがここに表示されます -->
             </div>
-            <!-- 商品追加およびスキャン -->
-            <div class="control-section">
-                <!-- 商品データ追加フォーム -->
-                <div class="form-section">
-                    <h2>商品データ追加</h2>
-                    <input type="text" id="newBarcode" placeholder="バーコード">
-                    <input type="text" id="newProductName" placeholder="商品名">
-                    <input type="number" id="newPrice" placeholder="値段">
-                    <button onclick="addProduct()">追加</button>
-                    <button onclick="saveProductData()">商品データを保存</button>
-                </div>
-                <!-- 割引データ追加フォーム -->
-                <div class="form-section">
-                    <h2>割引データ追加</h2>
-                    <input type="text" id="discountBarcode" placeholder="割引バーコード">
-                    <input type="text" id="discountValue" placeholder="割引値">
-                    <button onclick="addDiscount()">追加</button>
-                    <button onclick="saveCouponData()">割引データを保存</button>
-                </div>
-                <!-- 商品データ読み込み -->
-                <div class="form-section">
-                    <h2>商品データ読み込み</h2>
-                    <input type="file" id="productFile" accept=".txt">
-                    <button onclick="loadProductData()">読み込み</button>
-                </div>
-                <!-- クーポンデータ読み込み -->
-                <div class="form-section">
-                    <h2>クーポンデータ読み込み</h2>
-                    <input type="file" id="couponFile" accept=".txt">
-                    <button onclick="loadCouponData()">読み込み</button>
-                </div>
+        </div>
+        <div class="right-panel">
+            <div class="summary">
+                <p>合計 ¥<span id="total-price">0</span></p>
+                <p>数量 <span id="total-quantity">0</span>点</p>
+                <p>支払い ¥<input type="number" id="payment-amount" value="0"></p>
+                <p>お釣り ¥<span id="change">0</span></p>
+            </div>
+            <div class="buttons">
+                <p>商品登録・割引き登録</p>
+                <button id="add-item">商品の登録</button>
+                <button id="edit-item">商品の編集</button>
+                <button id="save-item-data">商品のデータ保存</button>
+                <p>割引きデータ</p>
+                <button id="add-discount">割引きの登録</button>
+                <button id="edit-discount">割引きの編集</button>
+                <button id="save-discount-data">割引きのデータ保存</button>
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
+    
+    <!-- 商品登録モーダル -->
+    <div id="item-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>商品を登録</h2>
+            <input type="text" id="item-barcode" placeholder="バーコード">
+            <input type="text" id="item-name" placeholder="商品名">
+            <input type="number" id="item-price" placeholder="値段">
+            <button id="register-item">登録</button>
+        </div>
+    </div>
+
+    <!-- 商品編集モーダル -->
+    <div id="item-edit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>商品の編集</h2>
+            <div id="edit-item-list">
+                <!-- 編集用商品リストがここに表示されます -->
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
 </body>
 </html>
