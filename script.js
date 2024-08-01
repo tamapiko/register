@@ -1,185 +1,85 @@
-let products = {};
-let discounts = {};
-let cart = [];
-let barcodeInput = '';
+document.addEventListener("DOMContentLoaded", function () {
+    const cartItems = document.getElementById("cart-items");
+    const totalPrice = document.getElementById("total-price");
+    const totalQuantity = document.getElementById("total-quantity");
+    const paymentAmount = document.getElementById("payment-amount");
+    const change = document.getElementById("change");
+    const resetCartButton = document.getElementById("reset-cart");
+    const registerProductButton = document.getElementById("register-product");
+    const editProductButton = document.getElementById("edit-product");
+    const saveProductDataButton = document.getElementById("save-product-data");
 
-// 商品追加関数
-function addProduct() {
-    const barcode = document.getElementById('newBarcode').value;
-    const name = document.getElementById('newProductName').value;
-    const price = parseFloat(document.getElementById('newPrice').value);
+    let cart = [];
+    let items = [];
 
-    products[barcode] = { name, price };
-}
-
-// 割引追加関数
-function addDiscount() {
-    const barcode = document.getElementById('discountBarcode').value;
-    const value = document.getElementById('discountValue').value;
-
-    if (value.includes('%')) {
-        const percentage = parseFloat(value.replace('%', ''));
-        discounts[barcode] = { type: 'percentage', value: percentage };
-    } else {
-        discounts[barcode] = { type: 'fixed', value: parseFloat(value) };
-    }
-}
-
-// キーボードイベントリスナー
-document.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-        scanProduct();
-    } else {
-        barcodeInput += event.key;
-    }
-});
-
-// 商品スキャン関数
-function scanProduct() {
-    const barcode = barcodeInput;
-    barcodeInput = '';
-
-    if (discounts[barcode] !== undefined) {
-        addDiscountToCart(barcode);
-    } else if (products[barcode] !== undefined) {
-        addToCart(barcode);
-    }
-}
-
-// 割引をカゴに追加する関数
-function addDiscountToCart(barcode) {
-    const discount = discounts[barcode];
-    let discountAmount = 0;
-
-    if (discount.type === 'percentage') {
-        const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-        discountAmount = total * (discount.value / 100);
-    } else if (discount.type === 'fixed') {
-        discountAmount = discount.value;
+    function updateCart() {
+        cartItems.innerHTML = "";
+        let total = 0;
+        let quantity = 0;
+        cart.forEach((item, index) => {
+            const cartItem = document.createElement("div");
+            cartItem.className = "cart-item";
+            cartItem.innerHTML = `
+                <span>${item.name}</span>
+                <span>${item.quantity}個</span>
+                <span>¥${item.price}</span>
+                <button onclick="removeItem(${index})"><i class="fas fa-minus"></i></button>
+                <button onclick="addItem(${index})"><i class="fas fa-plus"></i></button>
+            `;
+            cartItems.appendChild(cartItem);
+            total += item.price * item.quantity;
+            quantity += item.quantity;
+        });
+        totalPrice.textContent = `¥${total}`;
+        totalQuantity.textContent = `${quantity}点`;
+        change.textContent = `¥${paymentAmount.value - total}`;
     }
 
-    const discountItem = { name: '割引', price: -discountAmount, barcode, quantity: 1 };
-    cart.push(discountItem);
-    updateCart();
-}
-
-// カゴに商品追加関数
-function addToCart(barcode) {
-    const product = products[barcode];
-    const existingItem = cart.find(item => item.barcode === barcode);
-
-    if (existingItem) {
-        existingItem.quantity++;
-    } else {
-        cart.push({ ...product, barcode, quantity: 1 });
+    function removeItem(index) {
+        if (cart[index].quantity > 1) {
+            cart[index].quantity--;
+        } else {
+            cart.splice(index, 1);
+        }
+        updateCart();
     }
 
-    updateCart();
-}
+    function addItem(index) {
+        cart[index].quantity++;
+        updateCart();
+    }
 
-// カゴ更新関数
-function updateCart() {
-    const cartList = document.getElementById('cart');
-    cartList.innerHTML = '';
-
-    let total = 0;
-
-    cart.forEach((item, index) => {
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `
-            ${item.name} - ${item.price}円 x ${item.quantity}
-            <div class="quantity-controls">
-                <button onclick="decreaseQuantity(${index})">-</button>
-                <button onclick="increaseQuantity(${index})">+</button>
-            </div>
-        `;
-        cartList.appendChild(listItem);
-
-        total += item.price * item.quantity;
+    resetCartButton.addEventListener("click", function () {
+        cart = [];
+        updateCart();
     });
 
-    document.getElementById('totalAmount').textContent = total.toFixed(2);
-}
+    registerProductButton.addEventListener("click", function () {
+        document.getElementById("product-modal").style.display = "flex";
+    });
 
-// カゴ内商品の数量を増やす関数
-function increaseQuantity(index) {
-    cart[index].quantity++;
-    updateCart();
-}
+    editProductButton.addEventListener("click", function () {
+        document.getElementById("edit-product-modal").style.display = "flex";
+        updateItemList();
+    });
 
-// カゴ内商品の数量を減らす関数
-function decreaseQuantity(index) {
-    if (cart[index].quantity > 1) {
-        cart[index].quantity--;
-    } else {
-        cart.splice(index, 1);
+    function updateItemList() {
+        const editItemList = document.getElementById("edit-item-list");
+        editItemList.innerHTML = "";
+        items.forEach((item, index) => {
+            const listItem = document.createElement("div");
+            listItem.className = "cart-item";
+            listItem.innerHTML = `
+                <span>${item.name}</span>
+                <span>¥${item.price}</span>
+                <button onclick="editItem(${index})"><i class="fas fa-edit"></i></button>
+            `;
+            editItemList.appendChild(listItem);
+        });
     }
-    updateCart();
-}
 
-// カゴクリア関数
-function clearCart() {
-    cart = [];
-    updateCart();
-}
-
-// 商品データ読み込み関数
-function loadProductData() {
-    const file = document.getElementById('productFile').files[0];
-    const reader = new FileReader();
-
-    reader.onload = function(event) {
-        const lines = event.target.result.split('\n');
-        lines.forEach(line => {
-            const [barcode, name, price] = line.split(',');
-            products[barcode] = { name, price: parseFloat(price) };
-        });
-    };
-
-    reader.readAsText(file);
-}
-
-// 割引データ読み込み関数
-function loadCouponData() {
-    const file = document.getElementById('couponFile').files[0];
-    const reader = new FileReader();
-
-    reader.onload = function(event) {
-        const lines = event.target.result.split('\n');
-        lines.forEach(line => {
-            const [barcode, value] = line.split(',');
-            if (value.includes('%')) {
-                const percentage = parseFloat(value.replace('%', ''));
-                discounts[barcode] = { type: 'percentage', value: percentage };
-            } else {
-                discounts[barcode] = { type: 'fixed', value: parseFloat(value) };
-            }
-        });
-    };
-
-    reader.readAsText(file);
-}
-
-// 商品データ保存関数
-function saveProductData() {
-    const data = Object.entries(products).map(([barcode, product]) => `${barcode},${product.name},${product.price}`).join('\n');
-    const blob = new Blob([data], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'products.txt';
-    a.click();
-    URL.revokeObjectURL(url);
-}
-
-// 割引データ保存関数
-function saveCouponData() {
-    const data = Object.entries(discounts).map(([barcode, discount]) => `${barcode},${discount.type === 'percentage' ? discount.value + '%' : discount.value}`).join('\n');
-    const blob = new Blob([data], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'coupons.txt';
-    a.click();
-    URL.revokeObjectURL(url);
-}
+    function editItem(index) {
+        const item = items[index];
+        // 商品編集の処理を追加
+    }
+});
