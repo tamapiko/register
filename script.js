@@ -8,9 +8,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const registerProductButton = document.getElementById("register-product");
     const editProductButton = document.getElementById("edit-product");
     const saveProductDataButton = document.getElementById("save-product-data");
+    const registerDiscountButton = document.getElementById("register-discount");
+    const editDiscountButton = document.getElementById("edit-discount");
+    const saveDiscountDataButton = document.getElementById("save-discount-data");
+
+    const productModal = document.getElementById("product-modal");
+    const editProductModal = document.getElementById("edit-product-modal");
 
     let cart = [];
     let items = [];
+    let discounts = [];
 
     function updateCart() {
         cartItems.innerHTML = "";
@@ -55,11 +62,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     registerProductButton.addEventListener("click", function () {
-        document.getElementById("product-modal").style.display = "flex";
+        productModal.style.display = "flex";
     });
 
     editProductButton.addEventListener("click", function () {
-        document.getElementById("edit-product-modal").style.display = "flex";
+        editProductModal.style.display = "flex";
         updateItemList();
     });
 
@@ -68,18 +75,16 @@ document.addEventListener("DOMContentLoaded", function () {
         editItemList.innerHTML = "";
         items.forEach((item, index) => {
             const listItem = document.createElement("div");
-            listItem.className = "cart-item";
             listItem.innerHTML = `
                 <span>${item.name}</span>
-                <span>¥${item.price}</span>
                 <button onclick="editItem(${index})"><i class="fas fa-edit"></i></button>
             `;
             editItemList.appendChild(listItem);
         });
     }
 
-    function editItem(index) {
+    window.editItem = function (index) {
         const item = items[index];
         // 商品編集の処理を追加
-    }
+    };
 });
