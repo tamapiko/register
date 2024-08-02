@@ -4,56 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>レジシステム</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="left-panel">
-            <button id="reset-cart">カゴをリセット</button>
-            <div id="cart-items">
-                <!-- カートアイテムがここに表示される -->
-            </div>
-        </div>
-        <div class="right-panel">
-            <div id="summary">
-                <p>合計 <span id="total-price">¥0</span></p>
-                <p>数量 <span id="total-quantity">0</span>点</p>
-                <p>支払い <input type="number" id="payment-amount" value="0"></p>
-                <p>お釣り <span id="change">¥0</span></p>
-            </div>
-            <div class="actions">
-                <button id="register-product"><i class="fas fa-box"></i> 商品の登録</button>
-                <button id="edit-product"><i class="fas fa-edit"></i> 商品の編集</button>
-                <button id="save-product-data"><i class="fas fa-save"></i> 商品のデータ保存</button>
-                <button id="register-discount"><i class="fas fa-percent"></i> 割引きの登録</button>
-                <button id="edit-discount"><i class="fas fa-edit"></i> 割引きの編集</button>
-                <button id="save-discount-data"><i class="fas fa-save"></i> 割引きのデータ保存</button>
-            </div>
+<div class="container">
+    <div class="cart">
+        <button class="register-button" onclick="resetCart()">カゴをリセット</button>
+        <div id="cart-items">
+            <span>商品がありません</span>
         </div>
     </div>
-
-    <!-- 商品登録モーダル -->
-    <div id="product-modal" class="modal">
-        <div class="modal-content">
-            <h3>商品を登録</h3>
-            <label>バーコード <input type="text" id="product-barcode"></label>
-            <label>商品名 <input type="text" id="product-name"></label>
-            <label>値段 <input type="number" id="product-price"></label>
-            <button id="save-product">保存</button>
+    <div class="summary">
+        <div class="summary-item">
+            <span>合計</span>
+            <span>¥0</span>
+        </div>
+        <div class="summary-item">
+            <span>数量</span>
+            <span>0点</span>
+        </div>
+        <div class="summary-item">
+            <span>支払い</span>
+            <span>¥0</span>
+        </div>
+        <div class="summary-item">
+            <span>お釣り</span>
+            <span>¥0</span>
         </div>
     </div>
-
-    <!-- 商品編集モーダル -->
-    <div id="edit-product-modal" class="modal">
-        <div class="modal-content">
-            <h3>商品の編集</h3>
-            <div id="edit-item-list">
-                <!-- 編集可能な商品リストがここに表示される -->
-            </div>
+    <div class="actions">
+        <div class="button">
+            <span>商品データ</span>
+            <button onclick="showRegisterModal()">商品登録</button>
+            <button onclick="showEditModal()">商品編集</button>
+            <button>商品データ保存</button>
+        </div>
+        <div class="button">
+            <span>割引きデータ</span>
+            <button onclick="showRegisterModal()">割引き登録</button>
+            <button onclick="showEditModal()">割引き編集</button>
+            <button>割引きデータ保存</button>
         </div>
     </div>
+</div>
 
-    <script src="scripts.js"></script>
+<div class="modal" id="register-modal">
+    <div class="modal-header">商品を登録</div>
+    <div class="modal-content">
+        <input type="text" placeholder="バーコード">
+        <input type="text" placeholder="商品名">
+        <input type="text" placeholder="値段">
+    </div>
+    <div class="modal-actions">
+        <button class="modal-button" onclick="hideModal()">キャンセル</button>
+        <button class="modal-button">保存</button>
+    </div>
+</div>
+
+<div class="modal" id="edit-modal">
+    <div class="modal-header">商品を編集</div>
+    <div class="modal-content">
+        <div class="edit-item">
+            <span>商品1 ¥100</span>
+            <button>編集</button>
+            <button>削除</button>
+        </div>
+        <div class="edit-item">
+            <span>商品2 ¥100</span>
+            <button>編集</button>
+            <button>削除</button>
+        </div>
+    </div>
+    <div class="modal-actions">
+        <button class="modal-button" onclick="hideModal()">キャンセル</button>
+        <button class="modal-button">保存</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
