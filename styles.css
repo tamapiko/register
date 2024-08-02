@@ -75,10 +75,6 @@ body {
     border-radius: 5px;
 }
 
-.actions div {
-    padding: 0;
-}
-
 .actions button {
     background-color: #9999A2;
     color: #FFFFFF;
