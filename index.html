@@ -4,45 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>レジシステム</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Rounded+M+PLUS+1c:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rounded+Mplus+1c:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <div id="cart" class="panel">
-            <h2>カート</h2>
-            <ul id="cart-items">
-                <!-- 商品項目がここに表示されます -->
-            </ul>
-            <button id="reset-cart">カゴをリセット</button>
+        <div class="cart-section">
+            <button id="reset-cart" class="button">カゴをリセット</button>
+            <div id="cart-items" class="cart-items"></div>
         </div>
-        <div id="totals" class="panel">
-            <h2>合計</h2>
-            <p id="total-price">合計: ¥0</p>
-            <p id="total-quantity">数量: 0点</p>
-            <p id="payment">支払い: ¥0</p>
-            <p id="change">お釣り: ¥0</p>
+        <div class="summary-section">
+            <div id="summary" class="summary"></div>
         </div>
-        <div id="controls">
-            <div class="section">
-                <div class="subsection">
-                    <h3>商品データ</h3>
-                    <button id="add-product">商品の登録</button>
-                    <button id="edit-product">商品の編集</button>
-                    <button id="save-product-data">商品のデータ保存</button>
-                </div>
-                <div class="subsection">
-                    <h3>割引きデータ</h3>
-                    <button id="add-discount">割引きの登録</button>
-                    <button id="edit-discount">割引きの編集</button>
-                    <button id="save-discount-data">割引きのデータ保存</button>
-                </div>
+        <div class="registration-section">
+            <h2>商品登録・割引き登録</h2>
+            <div>
+                <h3>商品データ</h3>
+                <button id="register-product" class="button">商品の登録</button>
+                <button id="edit-product" class="button">商品の編集</button>
+                <button id="save-product-data" class="button">商品のデータ保存</button>
+            </div>
+            <div>
+                <h3>割引きデータ</h3>
+                <button id="register-discount" class="button">割引きの登録</button>
+                <button id="edit-discount" class="button">割引きの編集</button>
+                <button id="save-discount-data" class="button">割引きのデータ保存</button>
             </div>
         </div>
     </div>
 
-    <input type="text" id="barcode-input" placeholder="バーコードをスキャンしてください" autofocus>
-
-    <script src="script.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>
