@@ -11,6 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const registerDiscountButton = document.getElementById('register-discount');
     const editDiscountButton = document.getElementById('edit-discount');
     const saveDiscountDataButton = document.getElementById('save-discount-data');
+    const productModal = document.getElementById('product-modal');
+    const editModal = document.getElementById('edit-modal');
+    const saveProductButton = document.getElementById('save-product');
+    const cancelProductButton = document.getElementById('cancel-product');
+    const cancelEditButton = document.getElementById('cancel-edit');
+    const productList = document.getElementById('product-list');
 
     let cart = [];
     let products = [];
@@ -68,5 +74,96 @@ document.addEventListener('DOMContentLoaded', () => {
 
     resetCartButton.addEventListener('click', resetCart);
 
-    // Implement product and discount management functions...
+    // Product registration functionality
+    registerProductButton.addEventListener('click', () => {
+        productModal.classList.remove('hidden');
+        productModal.classList.add('visible');
+    });
+
+    cancelProductButton.addEventListener('click', () => {
+        productModal.classList.remove('visible');
+        productModal.classList.add('hidden');
+    });
+
+    saveProductButton.addEventListener('click', () => {
+        const barcode = document.getElementById('barcode').value;
+        const productName = document.getElementById('product-name').value;
+        const price = parseFloat(document.getElementById('price').value);
+
+        if (barcode && productName && !isNaN(price)) {
+            products.push({ barcode, name: productName, price });
+            productModal.classList.remove('visible');
+            productModal.classList.add('hidden');
+        } else {
+            alert('すべてのフィールドを正しく入力してください。');
+        }
+    });
+
+    // Product editing functionality
+    editProductButton.addEventListener('click', () => {
+        productList.innerHTML = '';
+        products.forEach((product, index) => {
+            const productElement = document.createElement('div');
+            productElement.classList.add('cart-item');
+            productElement.innerHTML = `
+                <span>${product.name}</span>
+                <span>¥${product.price}</span>
+                <button class="button" data-index="${index}" onclick="editProduct(${index})">編集</button>
+            `;
+            productList.appendChild(productElement);
+        });
+
+        editModal.classList.remove('hidden');
+        editModal.classList.add('visible');
+    });
+
+    cancelEditButton.addEventListener('click', () => {
+        editModal.classList.remove('visible');
+        editModal.classList.add('hidden');
+    });
+
+    window.editProduct = (index) => {
+        const product = products[index];
+        document.getElementById('barcode').value = product.barcode;
+        document.getElementById('product-name').value = product.name;
+        document.getElementById('price').value = product.price;
+
+        productModal.classList.remove('hidden');
+        productModal.classList.add('visible');
+
+        saveProductButton.onclick = () => {
+            const updatedBarcode = document.getElementById('barcode').value;
+            const updatedName = document.getElementById('product-name').value;
+            const updatedPrice = parseFloat(document.getElementById('price').value);
+
+            if (updatedBarcode && updatedName && !isNaN(updatedPrice)) {
+                products[index] = { barcode: updatedBarcode, name: updatedName, price: updatedPrice };
+                productModal.classList.remove('visible');
+                productModal.classList.add('hidden');
+            } else {
+                alert('すべてのフィールドを正しく入力してください。');
+            }
+        };
+    };
+
+    // Implement discount management functions similarly...
+
+    function scanProduct(barcode) {
+        const product = products.find(p => p.barcode === barcode);
+        if (product) {
+            const cartItem = cart.find(item => item.barcode === barcode);
+            if (cartItem) {
+                cartItem.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            updateCart();
+            updateSummary();
+        } else {
+            alert('商品が見つかりませんでした。');
+        }
+    }
+
+    // Example of scanning a product
+    // scanProduct('1234567890'); // Adjust barcode value for testing
 });
