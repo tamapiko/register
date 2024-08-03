@@ -38,6 +38,25 @@
         </div>
     </div>
 
+    <div id="product-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>商品を登録</h2>
+            <input id="barcode" class="input" type="text" placeholder="バーコード">
+            <input id="product-name" class="input" type="text" placeholder="商品名">
+            <input id="price" class="input" type="text" placeholder="値段">
+            <button id="save-product" class="button">保存</button>
+            <button id="cancel-product" class="button">キャンセル</button>
+        </div>
+    </div>
+
+    <div id="edit-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>商品を編集</h2>
+            <div id="product-list" class="product-list"></div>
+            <button id="cancel-edit" class="button">キャンセル</button>
+        </div>
+    </div>
+
     <script src="scripts.js"></script>
 </body>
 </html>
