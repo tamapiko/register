@@ -1,74 +1,68 @@
-const cart = [];
-const products = []; // 商品データの配列
-const discounts = []; // 割引きデータの配列
+document.addEventListener('DOMContentLoaded', () => {
+    const cartItemsElement = document.getElementById('cart-items');
+    const summaryElement = document.getElementById('summary');
+    const resetCartButton = document.getElementById('reset-cart');
+    const registerProductButton = document.getElementById('register-product');
+    const editProductButton = document.getElementById('edit-product');
+    const saveProductDataButton = document.getElementById('save-product-data');
+    const registerDiscountButton = document.getElementById('register-discount');
+    const editDiscountButton = document.getElementById('edit-discount');
+    const saveDiscountDataButton = document.getElementById('save-discount-data');
 
-document.getElementById('reset-cart').addEventListener('click', () => {
-    cart.length = 0;
-    updateCartDisplay();
-});
+    let cart = [];
+    let products = [];
+    let discounts = [];
 
-document.getElementById('barcode-input').addEventListener('input', (event) => {
-    const barcode = event.target.value;
-    const product = products.find(p => p.barcode === barcode);
-    if (product) {
-        addToCart(product);
+    function updateCart() {
+        cartItemsElement.innerHTML = '';
+        cart.forEach((item, index) => {
+            const itemElement = document.createElement('div');
+            itemElement.classList.add('cart-item');
+            itemElement.innerHTML = `
+                <span>${item.name}</span>
+                <span>${item.quantity}個</span>
+                <span>¥${item.price}</span>
+                <button class="button" data-index="${index}" onclick="removeFromCart(${index})">-</button>
+                <button class="button" data-index="${index}" onclick="addToCart(${index})">+</button>
+            `;
+            cartItemsElement.appendChild(itemElement);
+        });
     }
-    event.target.value = ''; // 入力フィールドをリセット
-});
 
-function addToCart(product) {
-    const cartItem = cart.find(item => item.product.barcode === product.barcode);
-    if (cartItem) {
-        cartItem.quantity++;
-    } else {
-        cart.push({ product, quantity: 1 });
+    function updateSummary() {
+        const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+        const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
+        summaryElement.innerHTML = `
+            <p>合計 ¥${totalAmount}</p>
+            <p>数量 ${totalQuantity}点</p>
+            <p>支払い ¥${totalAmount}</p>
+            <p>お釣り ¥0</p>
+        `;
     }
-    updateCartDisplay();
-}
 
-function updateCartDisplay() {
-    const cartItems = document.getElementById('cart-items');
-    cartItems.innerHTML = '';
-    let totalPrice = 0;
-    let totalQuantity = 0;
+    function addToCart(index) {
+        cart[index].quantity++;
+        updateCart();
+        updateSummary();
+    }
 
-    cart.forEach(item => {
-        const li = document.createElement('li');
-        li.textContent = `${item.product.name} x ${item.quantity} - ¥${item.product.price * item.quantity}`;
-        cartItems.appendChild(li);
+    function removeFromCart(index) {
+        if (cart[index].quantity > 1) {
+            cart[index].quantity--;
+        } else {
+            cart.splice(index, 1);
+        }
+        updateCart();
+        updateSummary();
+    }
 
-        totalPrice += item.product.price * item.quantity;
-        totalQuantity += item.quantity;
-    });
+    function resetCart() {
+        cart = [];
+        updateCart();
+        updateSummary();
+    }
 
-    document.getElementById('total-price').textContent = `合計: ¥${totalPrice}`;
-    document.getElementById('total-quantity').textContent = `数量: ${totalQuantity}点`;
-    document.getElementById('payment').textContent = `支払い: ¥0`; // 実際の支払い額は入力により更新する必要があります
-    document.getElementById('change').textContent = `お釣り: ¥0`; // 実際のお釣り額は入力により更新する必要があります
-}
+    resetCartButton.addEventListener('click', resetCart);
 
-// 商品登録・編集・保存ボタンのイベントリスナーを追加
-document.getElementById('add-product').addEventListener('click', () => {
-    // 商品登録処理
-});
-
-document.getElementById('edit-product').addEventListener('click', () => {
-    // 商品編集処理
-});
-
-document.getElementById('save-product-data').addEventListener('click', () => {
-    // 商品データ保存処理
-});
-
-// 割引き登録・編集・保存ボタンのイベントリスナーを追加
-document.getElementById('add-discount').addEventListener('click', () => {
-    // 割引き登録処理
-});
-
-document.getElementById('edit-discount').addEventListener('click', () => {
-    // 割引き編集処理
-});
-
-document.getElementById('save-discount-data').addEventListener('click', () => {
-    // 割引きデータ保存処理
+    // Implement product and discount management functions...
 });
