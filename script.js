@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const cartItemsElement = document.getElementById('cart-items');
-    const summaryElement = document.getElementById('summary');
+    const totalAmountElement = document.getElementById('total-amount');
+    const totalQuantityElement = document.getElementById('total-quantity');
+    const totalPaymentElement = document.getElementById('total-payment');
+    const totalChangeElement = document.getElementById('total-change');
     const resetCartButton = document.getElementById('reset-cart');
     const registerProductButton = document.getElementById('register-product');
     const editProductButton = document.getElementById('edit-product');
@@ -32,12 +35,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateSummary() {
         const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
         const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
-        summaryElement.innerHTML = `
-            <p>合計 ¥${totalAmount}</p>
-            <p>数量 ${totalQuantity}点</p>
-            <p>支払い ¥${totalAmount}</p>
-            <p>お釣り ¥0</p>
-        `;
+        const totalPayment = totalAmount; // Example: Adjust according to your payment logic
+        const totalChange = totalPayment - totalAmount;
+
+        totalAmountElement.textContent = `¥${totalAmount}`;
+        totalQuantityElement.textContent = `${totalQuantity}点`;
+        totalPaymentElement.textContent = `¥${totalPayment}`;
+        totalChangeElement.textContent = `¥${totalChange}`;
     }
 
     function addToCart(index) {
