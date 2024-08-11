@@ -4,33 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>レジシステム</title>
-    <link href="https://fonts.googleapis.com/css2?family=Rounded+Mplus+1c:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <div class="cart">
-            <button id="reset-cart" style="width: 100%;">カゴをリセット</button>
-            <div class="header">カゴ</div>
-            <div id="cart-items"></div>
+        <!-- カートセクション -->
+        <div class="cart-section">
+            <div id="cart-reset" class="cart-reset-btn">カゴをリセット</div>
+            <div id="cart-items">
+                <!-- 商品がここに追加されます -->
+            </div>
         </div>
-        <div class="total">
-            <div class="header">合計</div>
-            <div class="total-item">合計: <span id="total-price">¥0</span></div>
-            <div class="total-item">数量: <span id="total-quantity">0点</span></div>
-            <div class="total-item">支払い: <span id="payment-amount">¥0</span></div>
-            <div class="total-item">お釣り: <span id="change-amount">¥0</span></div>
+
+        <!-- 合計・数量・支払い・お釣りセクション -->
+        <div class="summary-section">
+            <div class="summary-item">
+                <span>合計</span>
+                <span id="total-price">¥0</span>
+            </div>
+            <div class="summary-item">
+                <span>数量</span>
+                <span id="total-quantity">0点</span>
+            </div>
+            <div class="summary-item">
+                <span>支払い</span>
+                <span id="payment">¥0</span>
+            </div>
+            <div class="summary-item">
+                <span>お釣り</span>
+                <span id="change">¥0</span>
+            </div>
         </div>
-        <div class="registration">
-            <div class="header">商品登録・割引き登録</div>
-            <button id="register-product">商品の登録</button>
-            <button id="edit-product">商品の編集</button>
-            <button id="save-product-data">商品のデータ保存</button>
-            <button id="register-discount">割引きの登録</button>
-            <button id="edit-discount">割引きの編集</button>
-            <button id="save-discount-data">割引きのデータ保存</button>
+
+        <!-- 商品登録・編集・割引登録セクション -->
+        <div class="buttons-section">
+            <div class="button" id="register-product">商品の登録</div>
+            <div class="button" id="edit-product">商品の編集</div>
+            <div class="button" id="save-product-data">商品のデータ保存</div>
+            <div class="button" id="register-discount">割引きの登録</div>
+            <div class="button" id="edit-discount">割引きの編集</div>
+            <div class="button" id="save-discount-data">割引きのデータ保存</div>
+            <div class="button" id="load-data">データの読み込み</div>
         </div>
     </div>
-    <script src="scripts.js"></script>
+
+    <!-- 商品登録モーダル -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>・商品を登録</h2>
+            <input type="text" id="barcode" placeholder="バーコード">
+            <input type="text" id="product-name" placeholder="商品名">
+            <input type="number" id="price" placeholder="値段">
+            <button id="add-product">追加</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
