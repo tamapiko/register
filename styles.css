@@ -1,72 +1,102 @@
-document.addEventListener("DOMContentLoaded", function() {
-    var productModal = document.getElementById("product-modal");
-    var registerProductBtn = document.getElementById("register-product");
-    var addProductBtn = document.getElementById("add-product");
-    var closeBtn = document.getElementsByClassName("close")[0];
-    var cartItems = document.getElementById("cart-items");
-    var totalPriceElement = document.getElementById("total-price");
-    var totalQuantityElement = document.getElementById("total-quantity");
-    var paymentElement = document.getElementById("payment");
-    var changeElement = document.getElementById("change");
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
 
-    registerProductBtn.onclick = function() {
-        productModal.style.display = "block";
-    }
+.container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
 
-    closeBtn.onclick = function() {
-        productModal.style.display = "none";
-    }
+.cart-section {
+    width: 30%;
+}
 
-    window.onclick = function(event) {
-        if (event.target == productModal) {
-            productModal.style.display = "none";
-        }
-    }
+.summary-section {
+    width: 20%;
+}
 
-    addProductBtn.onclick = function() {
-        var barcode = document.getElementById("barcode").value;
-        var productName = document.getElementById("product-name").value;
-        var price = parseInt(document.getElementById("price").value);
+.buttons-section {
+    width: 30%;
+}
 
-        if (barcode && productName && price) {
-            var product = document.createElement("div");
-            product.classList.add("product");
-            product.innerHTML = `
-                <div class="product-name">${productName}</div>
-                <div class="product-quantity">
-                    <button class="quantity-btn" data-action="decrease">-</button>
-                    <span>1個</span>
-                    <button class="quantity-btn" data-action="increase">+</button>
-                </div>
-                <div class="product-price">¥${price}</div>
-            `;
+.cart-reset-btn {
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
 
-            cartItems.appendChild(product);
-            updateSummary();
+.product {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
 
-            productModal.style.display = "none";
-        }
-    }
+.product-name, .product-price, .product-quantity {
+    display: inline-block;
+}
 
-    function updateSummary() {
-        var products = cartItems.getElementsByClassName("product");
-        var totalQuantity = 0;
-        var totalPrice = 0;
+.quantity-btn {
+    width: 30px;
+    height: 30px;
+    margin: 0 5px;
+    cursor: pointer;
+}
 
-        for (var i = 0; i < products.length; i++) {
-            var quantityElement = products[i].querySelector(".product-quantity span");
-            var priceElement = products[i].querySelector(".product-price");
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
 
-            var quantity = parseInt(quantityElement.textContent);
-            var price = parseInt(priceElement.textContent.replace("¥", ""));
+.button {
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
 
-            totalQuantity += quantity;
-            totalPrice += quantity * price;
-        }
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
 
-        totalPriceElement.textContent = `¥${totalPrice}`;
-        totalQuantityElement.textContent = `${totalQuantity}点`;
-        paymentElement.textContent = `¥${totalPrice}`;
-        changeElement.textContent = `¥0`; // 支払い額は手動で入力するか、後で変更可能
-    }
-});
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 300px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
