@@ -1,69 +1,103 @@
+/* スタイルシートの内容 */
 body {
-    font-family: 'Rounded Mplus 1c', sans-serif;
-    background-color: #f0f0f5;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
     margin: 0;
+    padding: 0;
 }
 
 .container {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 90%;
-    max-width: 1200px;
-    background-color: white;
+    justify-content: space-around;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.cart, .total, .registration {
+.cart-section {
     width: 30%;
 }
 
-.cart, .total {
-    border: 1px solid #9999A2;
-    border-radius: 10px;
+.summary-section {
+    width: 20%;
+}
+
+.buttons-section {
+    width: 30%;
+}
+
+.cart-reset-btn {
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
     padding: 10px;
-}
-
-.cart .header, .total .header {
-    font-size: 1.2em;
-    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
     margin-bottom: 10px;
-    border-bottom: 1px solid #9999A2;
-    padding-bottom: 5px;
 }
 
-.cart-item, .total-item {
+.product {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.product-name, .product-price, .product-quantity {
+    display: inline-block;
+}
+
+.quantity-btn {
+    width: 30px;
+    height: 30px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.button {
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
     margin-bottom: 10px;
 }
 
-.cart-item .controls, .total-item .controls {
-    display: flex;
-    gap: 5px;
-}
-
-button {
-    border: 4px solid #9999A2;
-    background-color: white;
-    font-family: 'Rounded Mplus 1c', sans-serif;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-button:active {
-    background-color: #e0e0e0;
-}
-
-.hidden {
+.modal {
     display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 300px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
