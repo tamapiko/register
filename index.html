@@ -3,196 +3,93 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>人工知能は誰でも作れるのか？（ふりがな付き）</title>
+<title>人工知能は誰でも作れるのか？（コンパクト版）</title>
 <style>
-  html, body { margin: 0; padding: 0; }
+  html, body { margin:0; padding:0; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Yu Gothic UI",
-                 "Yu Gothic", Meiryo, sans-serif;
-    line-height: 1.9;
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Yu Gothic UI","Yu Gothic", Meiryo, sans-serif;
+    line-height: 1.4;
     color: #222;
     background: #fff;
   }
   .wrap {
     max-width: 900px;
-    margin: 32px auto 96px;
+    margin: 16px auto 48px;
     padding: 0 16px;
   }
-  header {
-    text-align: center;
-    margin-bottom: 24px;
-  }
-  h1, h2 {
-    line-height: 1.35;
-    margin: 0.4em 0 0.2em;
-    font-weight: 700;
-  }
-  h1 { font-size: clamp(28px, 4vw, 40px); }
-  h2 { font-size: clamp(22px, 3vw, 28px); }
-  p { font-size: clamp(16px, 2vw, 20px); margin: 0.6em 0; }
-  .slide {
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 16px;
-    padding: clamp(16px, 3vw, 28px);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    margin: 18px 0 36px;
-  }
-  .meta {
-    color: #666; font-size: 0.9em;
-  }
-  .center { text-align: center; }
-  .thanks { font-size: clamp(22px, 3vw, 30px); font-weight: 700; }
-  ruby rt {
-    font-size: 0.6em;
-    color: #444;
-    ruby-position: over; /* ルビを上に */
-  }
+  h1, h2 { line-height: 1.2; margin: 0.3em 0 0.2em; font-weight:700; }
+  h1 { font-size: clamp(24px,3vw,32px); }
+  h2 { font-size: clamp(18px,2.5vw,24px); }
+  p { font-size: clamp(14px,1.8vw,18px); margin: 0.4em 0; }
+  .slide { background:#fff; border:1px solid #eee; border-radius:12px; padding:12px; margin:12px 0 24px; box-shadow:0 1px 4px rgba(0,0,0,0.05); }
+  .meta { color:#666; font-size:0.85em; }
+  .center { text-align:center; }
+  .thanks { font-size:clamp(18px,2.5vw,24px); font-weight:700; }
+  ruby rt { font-size:0.55em; color:#444; ruby-position:over; }
 
-  /* 印刷（A4） */
   @media print {
-    body { background: #fff; }
-    .wrap { margin: 0; max-width: none; padding: 0 18mm; }
-    .slide {
-      page-break-after: always;
-      border: none; box-shadow: none; border-radius: 0;
-      padding: 10mm 0;
-    }
-    header { margin-bottom: 0; }
+    body{background:#fff;}
+    .wrap{margin:0; max-width:none; padding:0 12mm;}
+    .slide{page-break-after:auto; border:none; box-shadow:none; border-radius:0; padding:6mm 0;}
+    header{margin-bottom:0;}
   }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <h1>発表テーマ：<ruby><rb>人工知能</rb><rt>じんこうちのう</rt></ruby>は<ruby><rb>誰</rb><rt>だれ</rt></ruby>でも作れるのか？</h1>
-      <p class="meta">3年3組3番　上田 聖優（まさひろ）</p>
-    </header>
+<div class="wrap">
+<header>
+<h1>発表テーマ：<ruby><rb>人工知能</rb><rt>じんこうちのう</rt></ruby>は<ruby><rb>誰</rb><rt>だれ</rt></ruby>でも作れるのか？</h1>
+<p class="meta">3年3組3番　上田 聖優（まさひろ）</p>
+</header>
 
-    <!-- Slide 1 -->
-    <section class="slide">
-      <h2>（スライド1：タイトル）</h2>
-      <p>
-        <ruby><rb>皆</rb><rt>みな</rt></ruby>さん、こんにちは。3<ruby><rb>年</rb><rt>ねん</rt></ruby>3<ruby><rb>組</rb><rt>くみ</rt></ruby>3<ruby><rb>番</rb><rt>ばん</rt></ruby>、上田 聖優（まさひろ）です。<br/>
-        （少し<ruby><rb>間</rb><rt>ま</rt></ruby>をあけて、<ruby><rb>聴衆</rb><rt>ちょうしゅう</rt></ruby>に<ruby><rb>語</rb><rt>かた</rt></ruby>りかけるように）<br/>
-        <ruby><rb>最近</rb><rt>さいきん</rt></ruby>、ChatGPTや<ruby><rb>画像生成</rb><rt>がぞうせいせい</rt></ruby>AIなど、すごい<ruby><rb>人工知能</rb><rt>じんこうちのう</rt></ruby>が<ruby><rb>次々</rb><rt>つぎつぎ</rt></ruby>と<ruby><rb>出</rb><rt>で</rt></ruby>てきていますよね。<br/>
-        「すごいな」と<ruby><rb>思</rb><rt>おも</rt></ruby>うと<ruby><rb>同時</rb><rt>どうじ</rt></ruby>に、「これって、<ruby><rb>一体</rb><rt>いったい</rt></ruby>どういう<ruby><rb>仕組</rb><rt>しく</rt></ruby>みなんだろう？」「もしかして、<ruby><rb>自分</rb><rt>じぶん</rt></ruby>でも<ruby><rb>作</rb><rt>つく</rt></ruby>れるのかな？」と、ふと<ruby><rb>思</rb><rt>おも</rt></ruby>ったんです。<br/>
-        <ruby><rb>今日</rb><rt>きょう</rt></ruby>のテーマは、そんな<ruby><rb>私</rb><rt>わたし</rt></ruby>の<ruby><rb>素朴</rb><rt>そぼく</rt></ruby>な<ruby><rb>疑問</rb><rt>ぎもん</rt></ruby>から<ruby><rb>始</rb><rt>はじ</rt></ruby>まった<ruby><rb>調査</rb><rt>ちょうさ</rt></ruby>の<ruby><rb>発表</rb><rt>はっぴょう</rt></ruby>です。<br/>
-        「<ruby><rb>人工知能</rb><rt>じんこうちのう</rt></ruby>は<ruby><rb>誰</rb><rt>だれ</rt></ruby>でも<ruby><rb>作</rb><rt>つく</rt></ruby>れるのか？」<ruby><rb>一緒</rb><rt>いっしょ</rt></ruby>に<ruby><rb>考</rb><rt>かんが</rt></ruby>えていきましょう。
-      </p>
-    </section>
+<section class="slide">
+<h2>（スライド1：タイトル）</h2>
+<p>
+<ruby><rb>皆</rb><rt>みな</rt></ruby>さん、こんにちは。3<ruby><rb>年</rb><rt>ねん</rt></ruby>3<ruby><rb>組</rb><rt>くみ</rt></ruby>3<ruby><rb>番</rb><rt>ばん</rt></ruby>、上田 聖優です。<br/>
+（少し<ruby><rb>間</rb><rt>ま</rt></ruby>をあけて<ruby><rb>聴衆</rb><rt>ちょうしゅう</rt></ruby>に語りかけるように）<br/>
+<ruby><rb>最近</rb><rt>さいきん</rt></ruby>、ChatGPTや<ruby><rb>画像生成</rb><rt>がぞうせいせい</rt></ruby>AIなど、すごい<ruby><rb>人工知能</rb><rt>じんこうちのう</rt></ruby>が次々と<ruby><rb>出</rb><rt>で</rt></ruby>ています。<br/>
+「すごいな」と<ruby><rb>思</rb><rt>おも</rt></ruby>うと同時に、「これって、一体どういう<ruby><rb>仕組</rb><rt>しく</rt></ruby>み？」「もしかして自分でも作れる？」と<ruby><rb>思</rb><rt>おも</rt></ruby>いました。<br/>
+今日のテーマはそんな<ruby><rb>私</rb><rt>わたし</rt></ruby>の<ruby><rb>疑問</rb><rt>ぎもん</rt></ruby>から始まった<ruby><rb>発表</rb><rt>はっぴょう</rt></ruby>です。
+</p>
+</section>
 
-    <!-- Slide 2 -->
-    <section class="slide">
-      <h2>（スライド2：テーマ・きっかけ・問い）</h2>
-      <p>
-        <ruby><rb>改</rb><rt>あらた</rt></ruby>めまして、<ruby><rb>今回</rb><rt>こんかい</rt></ruby>のテーマは「<ruby><rb>人工知能</rb><rt>じんこうちのう</rt></ruby>の<ruby><rb>仕組</rb><rt>しく</rt></ruby>み」についてです。<br/>
-        きっかけは、<ruby><rb>今</rb><rt>いま</rt></ruby>お<ruby><rb>話</rb><rt>はな</rt></ruby>しした<ruby><rb>通</rb><rt>とお</rt></ruby>り「<ruby><rb>自分</rb><rt>じぶん</rt></ruby>だけのオリジナルのAIが<ruby><rb>作</rb><rt>つく</rt></ruby>りたい！」という、とてもシンプルなものでした。<br/>
-        そこで、<ruby><rb>今回</rb><rt>こんかい</rt></ruby>の<ruby><rb>発表</rb><rt>はっぴょう</rt></ruby>では「<ruby><rb>人工知能</rb><rt>じんこうちのう</rt></ruby>は、<ruby><rb>専門家</rb><rt>せんもんか</rt></ruby>じゃない<ruby><rb>私</rb><rt>わたし</rt></ruby>たちでも<ruby><rb>作</rb><rt>つく</rt></ruby>れるのか？」という<ruby><rb>問い</rb><rt>とい</rt></ruby>の<ruby><rb>答</rb><rt>こた</rt></ruby>えを<ruby><rb>探</rb><rt>さが</rt></ruby>してみたいと<ruby><rb>思</rb><rt>おも</rt></ruby>います。
-      </p>
-    </section>
+<section class="slide">
+<h2>（スライド2：テーマ・きっかけ・問い）</h2>
+<p>
+今回のテーマは「<ruby><rb>人工知能</rb><rt>じんこうちのう</rt></ruby>の<ruby><rb>仕組</rb><rt>しく</rt></ruby>み」です。<br/>
+きっかけは「自分だけのAIを作りたい！」というシンプルなものです。<br/>
+今回の<ruby><rb>発表</rb><rt>はっぴょう</rt></ruby>では「<ruby><rb>専門家</rb><rt>せんもんか</rt></ruby>じゃない私でも作れるのか？」を<ruby><rb>探</rb><rt>さが</rt></ruby>します。
+</p>
+</section>
 
-    <!-- Slide 3 -->
-    <section class="slide">
-      <h2>（スライド3：<ruby><rb>人工知能</rb><rt>じんこうちのう</rt></ruby>の<ruby><rb>歴史</rb><rt>れきし</rt></ruby>①）</h2>
-      <p>
-        ではまず、AIの<ruby><rb>歴史</rb><rt>れきし</rt></ruby>から<ruby><rb>見</rb><rt>み</rt></ruby>ていきましょう。<br/>
-        <ruby><rb>皆</rb><rt>みな</rt></ruby>さんは、AIってここ<ruby><rb>数年</rb><rt>すうねん</rt></ruby>で<ruby><rb>急</rb><rt>きゅう</rt></ruby>に<ruby><rb>出</rb><rt>で</rt></ruby>てきた<ruby><rb>最新技術</rb><rt>さいしんぎじゅつ</rt></ruby>だと<ruby><rb>思</rb><rt>おも</rt></ruby>っていませんか？（少し<ruby><rb>間</rb><rt>ま</rt></ruby>をあけて）<br/>
-        <ruby><rb>実</rb><rt>じつ</rt></ruby>は、その<ruby><rb>考</rb><rt>かんが</rt></ruby>え<ruby><rb>方</rb><rt>かた</rt></ruby>の<ruby><rb>原点</rb><rt>げんてん</rt></ruby>は、なんと80<ruby><rb>年以上</rb><rt>ねんいじょう</rt></ruby>も<ruby><rb>前</rb><rt>まえ</rt></ruby>の1943<ruby><rb>年</rb><rt>ねん</rt></ruby>にまで<ruby><rb>遡</rb><rt>さかのぼ</rt></ruby>ります。<br/>
-        <ruby><rb>心理学者</rb><rt>しんりがくしゃ</rt></ruby>のウォルター・ピッツ氏が、「<ruby><rb>人間</rb><rt>にんげん</rt></ruby>の<ruby><rb>脳</rb><rt>のう</rt></ruby>の<ruby><rb>神経細胞</rb><rt>しんけいさいぼう</rt></ruby>の<ruby><rb>働</rb><rt>はたら</rt></ruby>きを、コンピューターで<ruby><rb>再現</rb><rt>さいげん</rt></ruby>できないか？」と<ruby><rb>考</rb><rt>かんが</rt></ruby>えました。<br/>
-        この「<ruby><rb>ニューラルネットワーク</rb><rt>にゅーらるねっとわーく</rt></ruby>」というアイデアが、すべての<ruby><rb>始</rb><rt>はじ</rt></ruby>まりだったんです。
-      </p>
-    </section>
+<section class="slide">
+<h2>（スライド3：<ruby><rb>人工知能</rb><rt>じんこうちのう</rt></ruby>の<ruby><rb>歴史</rb><rt>れきし</rt></ruby>①）</h2>
+<p>
+AIはここ数年で急に出てきたわけではなく、1943年に<ruby><rb>心理学者</rb><rt>しんりがくしゃ</rt></ruby>ウォルター・ピッツ氏が「脳の<ruby><rb>神経細胞</rb><rt>しんけいさいぼう</rt></ruby>の<ruby><rb>働</rb><rt>はたら</rt></ruby>きをコンピューターで再現できないか」と考えたことが始まりです。<br/>
+この「<ruby><rb>ニューラルネットワーク</rb><rt>にゅーらるねっとわーく</rt></ruby>」がAIの基礎です。
+</p>
+</section>
 
-    <!-- Slide 4 -->
-    <section class="slide">
-      <h2>（スライド4：<ruby><rb>人工知能</rb><rt>じんこうちのう</rt></ruby>の<ruby><rb>歴史</rb><rt>れきし</rt></ruby>②）</h2>
-      <p>
-        その<ruby><rb>始</rb><rt>はじ</rt></ruby>まりに<ruby><rb>続</rb><rt>つづ</rt></ruby>いたのが、こちらの<ruby><rb>写真</rb><rt>しゃしん</rt></ruby>の<ruby><rb>人物</rb><rt>じんぶつ</rt></ruby>、イギリスの<ruby><rb>数学者</rb><rt>すうがくしゃ</rt></ruby>アラン・チューリングです。<br/>
-        <ruby><rb>映画</rb><rt>えいが</rt></ruby>にもなったので、<ruby><rb>知</rb><rt>し</rt></ruby>っている人もいるかもしれませんね。<br/>
-        彼は、「その<ruby><rb>機械</rb><rt>きかい</rt></ruby>が、<ruby><rb>本当</rb><rt>ほんとう</rt></ruby>に<ruby><rb>人間</rb><rt>にんげん</rt></ruby>のような<ruby><rb>知能</rb><rt>ちのう</rt></ruby>を<ruby><rb>持</rb><rt>も</rt></ruby>っているのか」を<ruby><rb>試</rb><rt>ため</rt></ruby>すための「<ruby><rb>チューリングテスト</rb><rt>ちゅーりんぐてすと</rt></ruby>」という<ruby><rb>方法</rb><rt>ほうほう</rt></ruby>を<ruby><rb>考</rb><rt>かんが</rt></ruby>え<ruby><rb>出</rb><rt>だ</rt></ruby>しました。<br/>
-        AIの「<ruby><rb>作</rb><rt>つく</rt></ruby>り<ruby><rb>方</rb><rt>かた</rt></ruby>」のアイデアと、その「<ruby><rb>賢</rb><rt>かしこ</rt></ruby>さの<ruby><rb>測</rb><rt>はか</rt></ruby>り<ruby><rb>方</rb><rt>かた</rt></ruby>」のアイデア。この二つが、今のAIの<ruby><rb>土台</rb><rt>どだい</rt></ruby>となっています。
-      </p>
-    </section>
+<section class="slide">
+<h2>（スライド4：AIの仕組み）</h2>
+<p>
+AIを作る手順は料理に似ています。<br/>
+1. 学習させたい「データ」という食材を集める。<br/>
+2. 「モデル」という鍋に入れてプログラミングで学習させる。<br/>
+この二つがAI作りの基本です。
+</p>
+</section>
 
-    <!-- Slide 5 -->
-    <section class="slide">
-      <h2>（スライド5：<ruby><rb>ニューラルネットワーク</rb><rt>にゅーらるねっとわーく</rt></ruby>とは？）</h2>
-      <p>
-        さて、先ほど<ruby><rb>出</rb><rt>で</rt></ruby>てきた「<ruby><rb>ニューラルネットワーク</rb><rt>にゅーらるねっとわーく</rt></ruby>」。これがAIを<ruby><rb>理解</rb><rt>りかい</rt></ruby>する上で<ruby><rb>非常</rb><rt>ひじょう</rt></ruby>に<ruby><rb>重要</rb><rt>じゅうよう</rt></ruby>なキーワードです。<br/>
-        これは<ruby><rb>一体</rb><rt>いったい</rt></ruby>何かというと、<ruby><rb>一言</rb><rt>ひとこと</rt></ruby>でいえば「AIの<ruby><rb>脳</rb><rt>のう</rt></ruby>みそ」のモデルです。<br/>
-        右のイラストのように、<ruby><rb>私</rb><rt>わたし</rt></ruby>たちの<ruby><rb>脳</rb><rt>のう</rt></ruby>がたくさんの<ruby><rb>神経細胞</rb><rt>しんけいさいぼう</rt></ruby>で<ruby><rb>情報</rb><rt>じょうほう</rt></ruby>をやりとりして<ruby><rb>物事</rb><rt>ものごと</rt></ruby>を<ruby><rb>判断</rb><rt>はんだん</rt></ruby>するように、コンピューターの中でもその<ruby><rb>仕組</rb><rt>しく</rt></ruby>みをまねて、<ruby><rb>答</rb><rt>こた</rt></ruby>えを<ruby><rb>導</rb><rt>みちび</rt></ruby>き<ruby><rb>出</rb><rt>だ</rt></ruby>す<ruby><rb>方法</rb><rt>ほうほう</rt></ruby>のことを<ruby><rb>指</rb><rt>さ</rt></ruby>します。
-      </p>
-    </section>
+<section class="slide">
+<h2>（スライド5：AIは誰でも作れる？）</h2>
+<p>
+結論は「YES」です。<br/>
+正しいステップを踏めば、誰でもAIを作ることが可能です。<br/>
+今はネットや本で作り方が公開されており、学ぶ環境さえあれば挑戦できます。
+</p>
+<p class="center thanks">これで発表を終わります。ありがとうございました。</p>
+</section>
 
-    <!-- Slide 6 -->
-    <section class="slide">
-      <h2>（スライド6：<ruby><rb>人工知能</rb><rt>じんこうちのう</rt></ruby>の<ruby><rb>仕組</rb><rt>しく</rt></ruby>み）</h2>
-      <p>
-        では、<ruby><rb>具体</rb><rt>ぐたい</rt></ruby>的にAIはどうやって<ruby><rb>作</rb><rt>つく</rt></ruby>られているのでしょうか。AI<ruby><rb>作</rb><rt>づく</rt></ruby>りの<ruby><rb>手順</rb><rt>てじゅん</rt></ruby>は、<ruby><rb>料理</rb><rt>りょうり</rt></ruby>に<ruby><rb>似</rb><rt>に</rt></ruby>ています。<br/>
-        まず、AIに<ruby><rb>学習</rb><rt>がくしゅう</rt></ruby>させたい「データ」という<ruby><rb>食材</rb><rt>しょくざい</rt></ruby>をたくさん<ruby><rb>集</rb><rt>あつ</rt></ruby>めます。（データ<ruby><rb>収集</rb><rt>しゅうしゅう</rt></ruby>）<br/>
-        次に、その<ruby><rb>食材</rb><rt>しょくざい</rt></ruby>を「モデル」という<ruby><rb>鍋</rb><rt>なべ</rt></ruby>に<ruby><rb>入</rb><rt>い</rt></ruby>れて、プログラミングで<ruby><rb>賢</rb><rt>かしこ</rt></ruby>くなるように<ruby><rb>煮込</rb><rt>にこ</rt></ruby>んでいきます。（モデルの<ruby><rb>学習</rb><rt>がくしゅう</rt></ruby>）<br/>
-        この二つの<ruby><rb>手順</rb><rt>てじゅん</rt></ruby>が、AI<ruby><rb>作</rb><rt>づく</rt></ruby>りの<ruby><rb>基本</rb><rt>きほん</rt></ruby>です。
-      </p>
-    </section>
-
-    <!-- Slide 7 -->
-    <section class="slide">
-      <h2>（スライド7：AIで<ruby><rb>使</rb><rt>つか</rt></ruby>うプログラミング<ruby><rb>言語</rb><rt>げんご</rt></ruby>は？）</h2>
-      <p>
-        その「<ruby><rb>煮込</rb><rt>にこ</rt></ruby>む」<ruby><rb>作業</rb><rt>さぎょう</rt></ruby>、つまりプログラミングには、どんな<ruby><rb>言語</rb><rt>げんご</rt></ruby>が<ruby><rb>使</rb><rt>つか</rt></ruby>われるのでしょうか。<br/>
-        AI<ruby><rb>開発</rb><rt>かいはつ</rt></ruby>の<ruby><rb>世界</rb><rt>せかい</rt></ruby>で、<ruby><rb>今</rb><rt>いま</rt></ruby><ruby><rb>一番</rb><rt>いちばん</rt></ruby><ruby><rb>人気</rb><rt>にんき</rt></ruby>なのが「Python（パイソン）」という<ruby><rb>言語</rb><rt>げんご</rt></ruby>です。<br/>
-        このPythonは、AIだけでなく、<ruby><rb>皆</rb><rt>みな</rt></ruby>さんが<ruby><rb>普段</rb><rt>ふだん</rt></ruby><ruby><rb>見</rb><rt>み</rt></ruby>ているWebサイトを<ruby><rb>作</rb><rt>つく</rt></ruby>ったり、<ruby><rb>難</rb><rt>むずか</rt></ruby>しい<ruby><rb>科学計算</rb><rt>かがくけいさん</rt></ruby>をしたりと、<ruby><rb>本当</rb><rt>ほんとう</rt></ruby>にいろいろなことができる<ruby><rb>万能</rb><rt>ばんのう</rt></ruby><ruby><rb>言語</rb><rt>げんご</rt></ruby>なんです。
-      </p>
-    </section>
-
-    <!-- Slide 8 -->
-    <section class="slide">
-      <h2>（スライド8：データ<ruby><rb>収集</rb><rt>しゅうしゅう</rt></ruby>で<ruby><rb>必要</rb><rt>ひつよう</rt></ruby>なことは？）</h2>
-      <p>
-        AI<ruby><rb>作</rb><rt>づく</rt></ruby>りの「<ruby><rb>食材</rb><rt>しょくざい</rt></ruby>」であるデータ<ruby><rb>収集</rb><rt>しゅうしゅう</rt></ruby>。これは、何を<ruby><rb>作</rb><rt>つく</rt></ruby>るかで<ruby><rb>集</rb><rt>あつ</rt></ruby>めるものがまったく<ruby><rb>違</rb><rt>ちが</rt></ruby>います。<br/>
-        たとえば、<ruby><rb>猫</rb><rt>ねこ</rt></ruby>の<ruby><rb>画像</rb><rt>がぞう</rt></ruby>を<ruby><rb>認識</rb><rt>にんしき</rt></ruby>するAIを<ruby><rb>作</rb><rt>つく</rt></ruby>りたいなら、何万<ruby><rb>枚</rb><rt>まい</rt></ruby>もの<ruby><rb>猫</rb><rt>ねこ</rt></ruby>の<ruby><rb>画像</rb><rt>がぞう</rt></ruby>データが<ruby><rb>必要</rb><rt>ひつよう</rt></ruby>ですし、<ruby><rb>賢</rb><rt>かしこ</rt></ruby>いチャットボットを<ruby><rb>作</rb><rt>つく</rt></ruby>りたいなら、<ruby><rb>膨大</rb><rt>ぼうだい</rt></ruby>な<ruby><rb>量</rb><rt>りょう</rt></ruby>の<ruby><rb>文章</rb><rt>ぶんしょう</rt></ruby>データが<ruby><rb>必要</rb><rt>ひつよう</rt></ruby>になります。<br/>
-        <ruby><rb>作</rb><rt>つく</rt></ruby>りたいAIの<ruby><rb>目的</rb><rt>もくてき</rt></ruby>にあわせて、<ruby><rb>適切</rb><rt>てきせつ</rt></ruby>なデータを<ruby><rb>集</rb><rt>あつ</rt></ruby>めることが、AIの<ruby><rb>性能</rb><rt>せいのう</rt></ruby>を<ruby><rb>左右</rb><rt>さゆう</rt></ruby>するもっとも<ruby><rb>重要</rb><rt>じゅうよう</rt></ruby>なポイントです。
-      </p>
-    </section>
-
-    <!-- Slide 9 -->
-    <section class="slide">
-      <h2>（スライド9：<ruby><rb>人工知能</rb><rt>じんこうちのう</rt></ruby>は<ruby><rb>誰</rb><rt>だれ</rt></ruby>でも<ruby><rb>作</rb><rt>つく</rt></ruby>れるのか？）</h2>
-      <p>
-        さて、ここまでAIの<ruby><rb>歴史</rb><rt>れきし</rt></ruby>や<ruby><rb>仕組</rb><rt>しく</rt></ruby>みを<ruby><rb>見</rb><rt>み</rt></ruby>てきました。<br/>
-        それでは、いよいよ<ruby><rb>最初</rb><rt>さいしょ</rt></ruby>の<ruby><rb>問い</rb><rt>とい</rt></ruby>にお<ruby><rb>答</rb><rt>こた</rt></ruby>えします。<br/>
-        「<ruby><rb>人工知能</rb><rt>じんこうちのう</rt></ruby>は、<ruby><rb>誰</rb><rt>だれ</rt></ruby>でも<ruby><rb>作</rb><rt>つく</rt></ruby>れるのか？」<br/>
-        （少し<ruby><rb>間</rb><rt>ま</rt></ruby>をあけて、<ruby><rb>自信</rb><rt>じしん</rt></ruby>を<ruby><rb>持</rb><rt>も</rt></ruby>って）<br/>
-        その<ruby><rb>答</rb><rt>こた</rt></ruby>えは、「YES」です。<ruby><rb>正</rb><rt>ただ</rt></ruby>しいステップを<ruby><rb>踏</rb><rt>ふ</rt></ruby>めば、<ruby><rb>誰</rb><rt>だれ</rt></ruby>でも<ruby><rb>作</rb><rt>つく</rt></ruby>ることは<ruby><rb>可能</rb><rt>かのう</rt></ruby>です。<br/>
-        むかしは<ruby><rb>専門家</rb><rt>せんもんか</rt></ruby>だけの<ruby><rb>世界</rb><rt>せかい</rt></ruby>でしたが、<ruby><rb>今</rb><rt>いま</rt></ruby>はYouTubeやネットの<ruby><rb>記事</rb><rt>きじ</rt></ruby>、<ruby><rb>本</rb><rt>ほん</rt></ruby>などで、<ruby><rb>作</rb><rt>つく</rt></ruby>り<ruby><rb>方</rb><rt>かた</rt></ruby>がたくさん<ruby><rb>公開</rb><rt>こうかい</rt></ruby>されています。<br/>
-        つまり、<ruby><rb>学</rb><rt>まな</rt></ruby>ぶ<ruby><rb>環境</rb><rt>かんきょう</rt></ruby>さえあれば、<ruby><rb>私</rb><rt>わたし</rt></ruby>たちでもAI<ruby><rb>開発</rb><rt>かいはつ</rt></ruby>に<ruby><rb>挑戦</rb><rt>ちょうせん</rt></ruby>できる<ruby><rb>時代</rb><rt>じだい</rt></ruby>なんです。
-      </p>
-    </section>
-
-    <!-- Slide 10 -->
-    <section class="slide">
-      <h2>（スライド10：<ruby><rb>調</rb><rt>しら</rt></ruby>べて<ruby><rb>分</rb><rt>わ</rt></ruby>かったこと）</h2>
-      <p>
-        <ruby><rb>今回</rb><rt>こんかい</rt></ruby>の<ruby><rb>調査</rb><rt>ちょうさ</rt></ruby>で<ruby><rb>分</rb><rt>わ</rt></ruby>かったことを、3つのポイントでまとめます。<br/>
-        1つ目、AIは、プログラミングと<ruby><rb>大量</rb><rt>たいりょう</rt></ruby>のデータ<ruby><rb>学習</rb><rt>がくしゅう</rt></ruby>という、<ruby><rb>地道</rb><rt>じみち</rt></ruby>で<ruby><rb>大変</rb><rt>たいへん</rt></ruby>な<ruby><rb>作業</rb><rt>さぎょう</rt></ruby>で<ruby><rb>作</rb><rt>つく</rt></ruby>られていること。<br/>
-        2つ目、AIは<ruby><rb>最近</rb><rt>さいきん</rt></ruby>の<ruby><rb>技術</rb><rt>ぎじゅつ</rt></ruby>ではなく、80<ruby><rb>年以上</rb><rt>ねんいじょう</rt></ruby>も<ruby><rb>前</rb><rt>まえ</rt></ruby>から<ruby><rb>研究</rb><rt>けんきゅう</rt></ruby>されていた、<ruby><rb>歴史</rb><rt>れきし</rt></ruby>の<ruby><rb>長</rb><rt>なが</rt></ruby>い<ruby><rb>分野</rb><rt>ぶんや</rt></ruby>であること。これは<ruby><rb>私</rb><rt>わたし</rt></ruby>にとって<ruby><rb>一番</rb><rt>いちばん</rt></ruby>の<ruby><rb>驚</rb><rt>おどろ</rt></ruby>きでした。<br/>
-        そして3つ目、プログラミング<ruby><rb>技術</rb><rt>ぎじゅつ</rt></ruby>を<ruby><rb>学</rb><rt>まな</rt></ruby>び、<ruby><rb>正</rb><rt>ただ</rt></ruby>しい<ruby><rb>手順</rb><rt>てじゅん</rt></ruby>を<ruby><rb>踏</rb><rt>ふ</rt></ruby>めば、AIは<ruby><rb>誰</rb><rt>だれ</rt></ruby>でも<ruby><rb>作</rb><rt>つく</rt></ruby>れるということです。
-      </p>
-    </section>
-
-    <!-- Slide 11 -->
-    <section class="slide">
-      <h2>（スライド11：<ruby><rb>今後</rb><rt>こんご</rt></ruby>についてと<ruby><rb>感想</rb><rt>かんそう</rt></ruby>）</h2>
-      <p>
-        この<ruby><rb>調査</rb><rt>ちょうさ</rt></ruby>は、<ruby><rb>私</rb><rt>わたし</rt></ruby>にとって<ruby><rb>終</rb><rt>お</rt></ruby>わりではなく、<ruby><rb>始</rb><rt>はじ</rt></ruby>まりです。<br/>
-        <ruby><rb>今後</rb><rt>こんご</rt></ruby>は、AIがどんなデータをどうやって<ruby><rb>学習</rb><rt>がくしゅう</rt></ruby>しているのか、もっと<ruby><rb>深</rb><rt>ふか</rt></ruby>く<ruby><rb>掘</rb><rt>ほ</rt></ruby>り<ruby><rb>下</rb><rt>さ</rt></ruby>げてみたいです。<br/>
-        そして、まずは<ruby><rb>簡単</rb><rt>かんたん</rt></ruby>なものからということで、ブロックでプログラミングができる「Scratch」を<ruby><rb>使</rb><rt>つか</rt></ruby>って、AI<ruby><rb>作</rb><rt>づく</rt></ruby>りに<ruby><rb>挑戦</rb><rt>ちょうせん</rt></ruby>してみようと<ruby><rb>思</rb><rt>おも</rt></ruby>います。<br/>
-        <ruby><rb>今回</rb><rt>こんかい</rt></ruby><ruby><rb>調</rb><rt>しら</rt></ruby>べてみて、<ruby><rb>将来</rb><rt>しょうらい</rt></ruby>、プログラミングの<ruby><rb>知識</rb><rt>ちしき</rt></ruby>がない人でも、まるでアプリを<ruby><rb>使</rb><rt>つか</rt></ruby>うような<ruby><rb>感覚</rb><rt>かんかく</rt></ruby>で、<ruby><rb>誰</rb><rt>だれ</rt></ruby>もがAIを<ruby><rb>作</rb><rt>つく</rt></ruby>れるシステムが<ruby><rb>生</rb><rt>う</rt></ruby>まれるかもしれないなと、ワクワクしました。
-      </p>
-      <p class="center thanks">これで<ruby><rb>発表</rb><rt>はっぴょう</rt></ruby>を<ruby><rb>終</rb><rt>お</rt></ruby>わります。<ruby><rb>御清聴</rb><rt>ごせいちょう</rt></ruby>ありがとうございました。</p>
-    </section>
-
-  </div>
+</div>
 </body>
 </html>
